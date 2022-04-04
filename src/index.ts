@@ -18,6 +18,7 @@ async function start() {
             $user_id: subscriber.username,
             username: subscriber.username,
             content: tip.content,
+            authorName: tip.authors.toString(),
             $email: subscriber.email,
         });
     }
