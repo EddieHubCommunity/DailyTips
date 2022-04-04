@@ -1,4 +1,7 @@
+require('dotenv').config();
+
 import * as fs from 'fs';
+import { Novu } from '@novu/node';
 
 (async () => {
     await start();
@@ -6,8 +9,42 @@ import * as fs from 'fs';
 
 async function start() {
     const tip = getRandomTip();
+    const subscribers = getSubscribers();
 
-    console.log(tip);
+    const novu = new Novu(process.env.NOVU_API_KEY);
+
+    for (const subscriber of subscribers) {
+        await novu.trigger('daily-tip-5JhmK1xlB', {
+            $user_id: subscriber.username,
+            username: subscriber.username,
+            content: tip.content,
+            $email: subscriber.email,
+        });
+    }
+
+    console.log(`
+        The daily tip that was selected: ${tip.content} 
+        By: ${tip.authors.toString()}
+        
+        The notification was sent to ${subscribers.length} people.
+    `);
+}
+
+function getSubscribers() {
+    const subscriberFolders = __dirname + '/data/subscribers'
+    const files = fs.readdirSync(subscriberFolders);
+
+    const subscribers = [];
+    for (const file of files) {
+        const fileContent = fs.readFileSync(`${subscriberFolders}/${file}`, 'utf8');
+
+        subscribers.push({
+            username: file.replace('.json', ''),
+            ...JSON.parse(fileContent)
+        });
+    }
+
+    return subscribers;
 }
 
 function getRandomTip() {
