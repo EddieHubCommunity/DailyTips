@@ -48,7 +48,7 @@ Good first issue finder is licensed under the MIT License - see the [LICENSE](LI
 
 Thanks a lot for spending your time helping Good first issue finder grow. Thanks a lot! Keep rocking 🍻
 
-[![Contributors](https://contrib.rocks/image?repo=EddieHubCommunity/good-first-issue-finder)](https://github.com/EddieHubCommunity/DailyTips/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=EddieHubCommunity/DailyTips)](https://github.com/EddieHubCommunity/DailyTips/graphs/contributors)
 
 ## 🙏 Support
 
